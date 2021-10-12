@@ -71,7 +71,7 @@ const Nav = styled.div`
 const PcHeade = styled.div`
     box-sizing: border-box;
     box-shadow: 0 3px 3px rgb(0 0 0 / 20%) !important;
-    @media only screen and (max-width:992px){
+    @media only screen and (max-width:991px){
         display: none !important;
     }
 `

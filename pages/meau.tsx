@@ -6,18 +6,6 @@ import seasonal from '../public/meau/seasonal_bot_img.jpeg'
 
 //import Grid from '@mui/material/Grid';
 
-const MeauImg = [
-    {
-        imgNum: 1,
-        title: '바질 파스타 BASIL PASTA',
-        description: '바질페스토, 파스타, 모짜렐라 펄, 견과류, 올리브 *오리엔탈',
-    },
-    {
-        imgNum: 2,
-        title: '바질 치킨 BASIL CHICKEN',
-        description: '바질페스토, 치킨, 크랜베리 *시저',
-    },
-]
 const WarmImg = [
     {
         imgNum: 1,
@@ -39,10 +27,10 @@ const WarmImg = [
         title: '바질 치킨 BASIL CHICKEN',
         description: '바질페스토, 치킨, 크랜베리 *시저',
     },
-]
+];
 const Topping = [
     {
-        Kname: "치킨",
+        Kname: '치킨',
         Ename: 'CHICKEN',
     },
     {
@@ -73,13 +61,13 @@ const Topping = [
         Kname: '치킨소시지',
         Ename: 'CHICKEN SAUSAGE',
     },
-]
+];
 
 type Data = {
     image: string,
     title: string,
     description: string
-}
+};
 
 const Meau = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
     const Gimbabs: Data[] = Props.GimbabList;
