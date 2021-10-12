@@ -22,9 +22,6 @@ const MeauList = async (req: NextApiRequest, res: NextApiResponse) => {
       temporary.description = item.data().description;
       resJsonArray.push(temporary);
     });
-
-    console.log(resJsonArray);
-
     res.status(200).json(resJsonArray);
   } catch (e) {
     console.error("Error adding document: ", e);

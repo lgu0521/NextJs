@@ -2,9 +2,6 @@ import Link from "next/link";
 import styled from 'styled-components';
 import Logo from '../../public/logo.jpeg'
 import Image from 'next/image';
-import { useMediaQuery } from "react-responsive"
-
-
 
 const Ul = styled.div`
     display: flex;
@@ -16,7 +13,7 @@ const Li = styled.li`
     text-decoration: none;
     @media only screen and (max-width: 600px) {
         font-size:${props => props.theme.fontSizes.xl};
-        padding: 0 15px 0 15px;
+        padding: 0 10px 0 10px;
     }
     @media only screen and (min-width: 600px) {
         font-size:${props => props.theme.fontSizes.xl};
@@ -71,23 +68,26 @@ const Nav = styled.div`
     width: 100%;
     height: ${(props: NavProps) => props.height ? props.height : ""};
 `
-const Heade = styled.div`
+const PcHeade = styled.div`
     box-sizing: border-box;
-    border-bottom: 1px solid rgb(0 0 0 / 20%);
-    @media only screen and (min-width: 992px){
-        box-shadow: 0 3px 3px rgb(0 0 0 / 20%) !important;
+    box-shadow: 0 3px 3px rgb(0 0 0 / 20%) !important;
+    @media only screen and (max-width:992px){
+        display: none !important;
+    }
+`
+const MobileHeade = styled.div`
+    box-sizing: border-box;
+    box-shadow: 0 3px 3px rgb(0 0 0 / 20%) !important;
+    @media only screen and (min-width: 991px){
+        display: none !important;
     }
 `
 const Header = () => {
-    const isPc = useMediaQuery({
-        query: "(min-width:992px)"});
-
     return (
-        <div>{
-            isPc ?
-            <Heade>
+        <div>
+            <PcHeade>
                 <Nav height="100px">
-                    <Wrap width="20%" height="100%"> 
+                    <Wrap width="20%" height="100%">
                         <Image height={70} width={78} src={Logo} />
                     </Wrap>
                     <Wrap width="60%" height="100%">
@@ -98,12 +98,12 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="meau">
+                                <Link href="/meau">
                                     <a>메뉴</a>
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="store">
+                                <Link href="/store">
                                     <a>매장</a>
                                 </Link>
                             </Li>
@@ -119,49 +119,47 @@ const Header = () => {
                             </Li>
                         </Ul>
                     </Wrap>
-                    <Wrap width="20%" height="100%"/>
+                    <Wrap width="20%" height="100%" />
                 </Nav>
-            </Heade>:
-            <Heade>
-            <Nav height="75px">
-                <Wrap width="100%" height="75px">
-                    <Image height={60} width={68} src={Logo} />
-                </Wrap>
-                <LineWrap width="100%" height="50px">
-                    <Ul>
-                        <Li>
-                            <Link href="/brand">
-                                <a>브랜드</a>
-                            </Link>
-                        </Li>
-                        <Li>
-                            <Link href="meau">
-                                <a>메뉴</a>
-                            </Link>
-                        </Li>
-                        <Li>
-                            <Link href="store">
-                                <a>매장</a>
-                            </Link>
-                        </Li>
-                        <Li>
-                            <Link href="/business">
-                                <a>창업안내</a>
-                            </Link>
-                        </Li>
-                        <Li>
-                            <Link href="/board">
-                                <a>게시판</a>
-                            </Link>
-                        </Li>
-                    </Ul>
-                </LineWrap>
-            </Nav>
-        </Heade>
-        }
+            </PcHeade>
+            <MobileHeade>
+                <Nav height="75px">
+                    <Wrap width="100%" height="75px">
+                        <Image height={60} width={68} src={Logo} />
+                    </Wrap>
+                    <LineWrap width="100%" height="50px">
+                        <Ul>
+                            <Li>
+                                <Link href="/brand">
+                                    <a>브랜드</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/meau">
+                                    <a>메뉴</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/store">
+                                    <a>매장</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/business">
+                                    <a>창업안내</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/board">
+                                    <a>게시판</a>
+                                </Link>
+                            </Li>
+                        </Ul>
+                    </LineWrap>
+                </Nav>
+            </MobileHeade>
         </div>
 
     )
 };
-
 export default Header;

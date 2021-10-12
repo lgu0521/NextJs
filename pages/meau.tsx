@@ -84,7 +84,7 @@ type Data = {
 const Meau = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
     const Gimbabs: Data[] = Props.GimbabList;
     return (
-        <AppContainer>
+        <>
             <Title>메뉴</Title>
             <GridWrap>
                 <TitleWrap>
@@ -170,7 +170,7 @@ const Meau = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
                     ))}
                 </Grid>
             </GridWrap>
-        </AppContainer>
+        </>
     );
 };
 
@@ -203,13 +203,6 @@ const Title = styled.span`
     text-align: center;
     font-weight: normal;
     display: block;
-`
-
-const AppContainer = styled.div`
-  &,
-  & * {
-    box-sizing: border-box;
-  }
 `
 
 const GridWrap = styled.section`
