@@ -113,7 +113,7 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/board">
+                                <Link href="/notice">
                                     <a>게시판</a>
                                 </Link>
                             </Li>
@@ -150,7 +150,7 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/board">
+                                <Link href="/notice">
                                     <a>게시판</a>
                                 </Link>
                             </Li>

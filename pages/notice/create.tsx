@@ -3,12 +3,12 @@ import { EditorProps, Editor } from '@toast-ui/react-editor';
 import styled from 'styled-components';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { useRef, useState } from 'react';
-import { TuiEditorWithForwardedProps } from '../components/Editor';
+import { TuiEditorWithForwardedProps } from '../../components/Editor';
 import React from 'react';
 import axios from 'axios';
 
 
-const TuiNoSSRWrapper = dynamic<TuiEditorWithForwardedProps>(() => import('../components/Editor'), {
+const TuiNoSSRWrapper = dynamic<TuiEditorWithForwardedProps>(() => import('../../components/Editor'), {
     ssr: false,
     loading: () => <p>Loading . . .</p>
 })

@@ -1,27 +1,36 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import firebase from '../../../service/firebase';
 
 type Data = {
-  image: string,
-  name: string,
-  location: string,
-  clock: string,
-  description: string,
-  phonenumber: string
+  id: string,
+  title: string,
+  content: string,
+  datetime: string,
 }
 
-const StoreList = async (req: NextApiRequest, res: NextApiResponse<Array<Data>>) => {
+const NoticeList = async (req: NextApiRequest, res: NextApiResponse<Array<Data>>) => {
   const firestore = getFirestore(firebase);
+  var resJsonArray = [] as Data[];
   try {
-    const list = await getDocs(collection(firestore, 'store'));
-    list.forEach((item)=>{
-        console.log(item.data());
-    })
+    const querySnapshot = await getDocs(collection(firestore, 'Notice'));
+
+    querySnapshot.forEach((item) => {
+      var temporary = {} as Data;
+      temporary.id = item.id;
+      temporary.title = item.data().title;
+      temporary.content = item.data().content;
+      temporary.datetime = item.data().datetime;
+      resJsonArray.push(temporary);
+    });
+
+    console.log(resJsonArray);
+
+    res.status(200).json(resJsonArray);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 }
 
 
-export default StoreList;
+export default NoticeList;
