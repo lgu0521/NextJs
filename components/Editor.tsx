@@ -1,13 +1,9 @@
-import { Editor } from '@toast-ui/react-editor';
-const editor = () => {
-    return (
-        <Editor
-        initialValue="hello"
-        previewStyle="vertical"
-        height="600px"
-        useCommandShortcut={true}
-        initialEditType="markdown"/>
-    );
-};
+import { Editor, EditorProps } from "@toast-ui/react-editor";
 
-export default editor;
+export interface TuiEditorWithForwardedProps extends EditorProps {
+   forwardedRef?: React.MutableRefObject<Editor>;
+}
+
+export default (props: TuiEditorWithForwardedProps) => (
+  <Editor {...props} ref={props.forwardedRef} />
+); 
