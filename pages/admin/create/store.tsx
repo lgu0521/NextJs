@@ -1,25 +1,18 @@
 import { FirebaseStorage, getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { StoreCreateDTO, Url } from "../../dto/store-create.dto";
-import GetDownloadUrl from "../../components/GetDownloadUrl";
+import { StoreCreateDTO, Url } from "../../../dto/store-create.dto";
+import { GetMultiDownloadUrl } from "../../../components/GetDownloadUrl";
 
-
-const Business = () => {
+const AdminCreateStore = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<StoreCreateDTO>();
     const onSubmit = async (data: StoreCreateDTO) => {
-        const downloadUrls = await GetDownloadUrl(data.tmpUrl);
-       // data.url = downloadUrls;
-        console.log(downloadUrls.length);
-
-
-        // const res = await fetch("http://localhost:3000/api/store/image-create", {
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data'
-        //     },
-        //     method: 'POST',
-        //     body: JSON.stringify(data)
-        // });
+        const downloadUrls: string[] = await GetMultiDownloadUrl(data.tmpUrl);
+        data.url = downloadUrls;
+        const res = await fetch("http://localhost:3000/api/store/create", {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
     }
 
     return (
@@ -50,4 +43,4 @@ const Business = () => {
     );
 };
 
-export default Business;
+export default AdminCreateStore;

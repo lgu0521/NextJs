@@ -5,7 +5,7 @@ export interface StoreCreateDTO {
     operation: string,
     phonenumber: string,
     tmpUrl: File[],
-    url: Array<Url>
+    url: string[]
 }
 
 export interface Url{
@@ -18,5 +18,5 @@ export interface StoreInfoDTO {
     location: string,
     operation: string,
     phonenumber: string,
-    url: File[],
+    url: string[]
 }

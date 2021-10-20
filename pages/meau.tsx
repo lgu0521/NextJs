@@ -163,7 +163,7 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const res = await fetch("http://localhost:3000/api/meau/gimbab");
+    const res = await fetch("http://localhost:3000/api/menu/gimbab");
     const GimbabList: Data[] = await res.json();
 
     if (!GimbabList) {
@@ -178,20 +178,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
     }
 }
-
-// const Title = styled.span`
-//     text-align: center;
-//     font-weight: 300;
-//     font-size: 42px;
-//     line-height: 1.1em;
-//     letter-spacing: -0.02em;
-//     color: #333;
-//     padding-bottom: 20px;
-//     padding-top: 20px;
-//     text-align: center;
-//     font-weight: normal;
-//     display: block;
-// `
 
 const GridWrap = styled.section`
   margin: 0 1em;

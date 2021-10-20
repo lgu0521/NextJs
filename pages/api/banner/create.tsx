@@ -1,21 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getFirestore, doc, setDoc, Timestamp, collection } from "firebase/firestore";
 import firebase from '../../../service/firebase';
-import { StoreCreateDTO } from "../../../dto/store-create.dto";
+import { MenuCreateDTO } from "../../../dto/menu-create.dto";
 
+interface BannerCreateDTO {
+    tmpUrl: File,
+    url: string,
+    order: number
+}
 
-const Form = async (req: NextApiRequest, res: NextApiResponse) => {
+const CreateMeau = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         try {
             const firestore = getFirestore(firebase);
-            const reqBody:StoreCreateDTO = JSON.parse(req.body);
-            const newDocRef = doc(collection(firestore, "Store"));
+            const reqBody:BannerCreateDTO = JSON.parse(req.body);
+            const newDocRef = doc(collection(firestore, "Banner"));
             const docData = {
-                name: reqBody.name,
-                phonenumber: reqBody.phonenumber,
-                location: reqBody.location,
-                operation: reqBody.operation,
-                url: reqBody.url,
+                order: reqBody.order,
+                url: reqBody.url
             }
             const docRef = await setDoc(newDocRef, docData);
             res.status(200).json({ message: "success" });
@@ -27,4 +29,4 @@ const Form = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 }
 
-export default Form;
+export default CreateMeau;
