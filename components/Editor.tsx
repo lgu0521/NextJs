@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Editor, EditorProps } from "@toast-ui/react-editor";
 
 export interface TuiEditorWithForwardedProps extends EditorProps {

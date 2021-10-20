@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import Link from "next/link";
 import styled from 'styled-components';
 import Logo from '../../public/logo.jpeg'
@@ -108,12 +110,12 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/business">
+                                <Link href="/startup-guide">
                                     <a>창업안내</a>
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/notice">
+                                <Link href="/test">
                                     <a>게시판</a>
                                 </Link>
                             </Li>
@@ -145,12 +147,12 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/business">
+                                <Link href="/startup-guide">
                                     <a>창업안내</a>
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/notice">
+                                <Link href="/test">
                                     <a>게시판</a>
                                 </Link>
                             </Li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { GetServerSideProps, GetStaticPaths, InferGetServerSidePropsType } from 'next';
 import { Params } from 'next/dist/server/router';
 import SimpleImageSlider from "react-simple-image-slider";
 import styled from 'styled-components';
@@ -16,7 +16,7 @@ type Id = {
     storeId: string
 }
 
-const StoreDetailPage = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
+const StoreDetailPage = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const storeData: Data = Props.resJson;
     console.log(storeData.url);
     const ImageUrl = storeData.url.map((item, key) => {
@@ -41,17 +41,7 @@ const StoreDetailPage = (Props: InferGetStaticPropsType<typeof getStaticProps>) 
     );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const res = await fetch("http://localhost:3000/api/store/getlist");
-    const resJson: Id[] = await res.json();
-
-    const paths = resJson.map((item) => ({
-        params: { id: item.storeId },
-    }));
-    return { paths, fallback: false }
-}
-
-export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }: Params) => {
     const { id } = params;
     const res = await fetch(`http://localhost:3000/api/store/${id}`);
     const resJson = await res.json();
@@ -68,6 +58,17 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         }
     }
 }
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+//     const res = await fetch("http://localhost:3000/api/store/getlist");
+//     const resJson: Id[] = await res.json();
+
+//     const paths = resJson.map((item) => ({
+//         params: { id: item.storeId },
+//     }));
+//     return { paths, fallback: false }
+// }
+
 
 
 const Container = styled.div`

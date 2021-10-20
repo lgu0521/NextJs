@@ -1,4 +1,4 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ type PropsData = {
 }
 
 
-const Brand = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Brand = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const stroeList: PropsData[] = Props.stroeList;
     return (
         <Container>
@@ -23,7 +23,7 @@ const Brand = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
                         <Box>
                             <Link href={`/store/${item.storeId}`}>
                                 <a>
-                                    <Image src={item.url} alt="" width="100%" height="60px" layout="responsive" objectFit="cover" />
+                                    <Image src={item.url} alt="" width="100%" height="100%" layout="responsive" objectFit="cover" />
                                     <Wrap>
                                         <Name>{item.name}</Name>
                                         <Location>{item.location}</Location>
@@ -122,7 +122,7 @@ letter-spacing: -0.025em;
     font-size:${props => props.theme.fontSizes.xl} !important;
     }
 `
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const res = await fetch('http://localhost:3000/api/store');
     const stroeList: PropsData[] = await res.json();
 

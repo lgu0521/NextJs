@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import styled from 'styled-components';
 import seasonal from '../public/meau/seasonal_bot_img.jpeg'
@@ -69,7 +68,7 @@ type Data = {
     description: string
 };
 
-const Meau = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const Gimbabs: Data[] = Props.GimbabList;
     return (
         <>
@@ -82,7 +81,7 @@ const Meau = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
                 <Grid>
                     {Gimbabs.map((item, key) => (
                         <Item key={key}>
-                            <Image src={item.image} alt="" height={340}
+                            <Image src="http://192.168.219.103:8000/images/menu1.png" alt="" height={340}
                                 width={380} layout="intrinsic" />
                             <span>
                                 <h5>{item.title}</h5>
@@ -162,7 +161,7 @@ const Meau = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const res = await fetch("http://localhost:3000/api/meau/gimbab");
     const GimbabList: Data[] = await res.json();
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { GetServerSideProps, GetStaticPaths, InferGetServerSidePropsType } from 'next';
 import { Params } from 'next/dist/server/router';
 import styled from 'styled-components';
 
@@ -13,7 +13,7 @@ type Id = {
     id: string
 }
 
-const NoticeDetailPage = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
+const NoticeDetailPage = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const noticeData: Data = Props.resJson;
     return (
         <div>
@@ -24,17 +24,7 @@ const NoticeDetailPage = (Props: InferGetStaticPropsType<typeof getStaticProps>)
     );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const res = await fetch("http://localhost:3000/api/notice/getlist");
-    const resJson: Id[] = await res.json();
-
-    const paths = resJson.map((item) => ({
-        params: { id: item.id },
-    }));
-    return { paths, fallback: false }
-}
-
-export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }: Params) => {
     const { id } = params;
     const res = await fetch(`http://localhost:3000/api/notice/${id}`);
     const resJson = await res.json();
@@ -51,5 +41,16 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         }
     }
 }
+// export const getStaticPaths: GetStaticPaths = async () => {
+//     const res = await fetch("http://localhost:3000/api/notice/getlist");
+//     const resJson: Id[] = await res.json();
+
+//     const paths = resJson.map((item) => ({
+//         params: { id: item.id },
+//     }));
+//     return { paths, fallback: false }
+// }
+
+
 
 export default NoticeDetailPage;

@@ -1,4 +1,4 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import styled from 'styled-components';
 import Link from 'next/link';
 
@@ -9,7 +9,7 @@ type PropsData = {
     datetime: string
 }
 
-const Brand = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Brand = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const noticeList: PropsData[] = Props.noticeList;
     console.log(noticeList);
     return (
@@ -33,7 +33,7 @@ const Brand = (Props: InferGetStaticPropsType<typeof getStaticProps>) => {
 const Container = styled.div`
 display: inline-block;
 `
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const res = await fetch('http://localhost:3000/api/notice/');
     const noticeList: PropsData[] = await res.json();
 
