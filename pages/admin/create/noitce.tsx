@@ -5,11 +5,11 @@ import { EditorProps, Editor } from '@toast-ui/react-editor';
 import styled from 'styled-components';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { useRef, useState } from 'react';
-import { TuiEditorWithForwardedProps } from '../../components/Editor';
+import { TuiEditorWithForwardedProps } from '../../../components/Editor';
 import React from 'react';
 
 
-const TuiNoSSRWrapper = dynamic<TuiEditorWithForwardedProps>(() => import('../../components/Editor'), {
+const TuiNoSSRWrapper = dynamic<TuiEditorWithForwardedProps>(() => import('../../../components/Editor'), {
     ssr: false,
     loading: () => <p>Loading . . .</p>
 })
@@ -17,7 +17,7 @@ const TuiWrapper = React.forwardRef((props: EditorProps, ref) => (
     <TuiNoSSRWrapper {...props} forwardedRef={ref as React.MutableRefObject<Editor>} />
 ));
 
-const Board = () => {
+const AdminCreateNotice = () => {
     const editorRef = useRef<Editor>(null);
     const [titleInput, setTitleInput] = useState("");
     const Submit = async () => {
@@ -57,4 +57,4 @@ font-size: ${props => props.theme.fontSizes.lg};
 background-color: black;
 `
 
-export default Board;
+export default AdminCreateNotice;
