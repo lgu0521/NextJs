@@ -8,18 +8,13 @@ import GetDownloadUrl from "../../components/GetDownloadUrl";
 const Business = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<StoreCreateDTO>();
     const onSubmit = async (data: StoreCreateDTO) => {
-        const downloadUrls = await GetDownloadUrl(data.tmpUrl);
-       // data.url = downloadUrls;
-        console.log(downloadUrls.length);
-
-
-        // const res = await fetch("http://localhost:3000/api/store/image-create", {
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data'
-        //     },
-        //     method: 'POST',
-        //     body: JSON.stringify(data)
-        // });
+        const downloadUrls:string[] = await GetDownloadUrl(data.tmpUrl);
+        data.url = downloadUrls;
+        console.log(JSON.stringify(data));
+        const res = await fetch("http://localhost:3000/api/store/create", {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
     }
 
     return (

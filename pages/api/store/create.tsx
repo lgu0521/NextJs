@@ -25,7 +25,6 @@ const Form = async (req: NextApiRequest, res: NextApiResponse) => {
       } else {
         // Handle any other HTTP method
       }
-    
 }
 
 export default Form;
