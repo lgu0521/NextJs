@@ -2,6 +2,7 @@ import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferG
 import Image from 'next/image';
 import styled from 'styled-components';
 import seasonal from '../public/meau/seasonal_bot_img.jpeg'
+import { MainTitle, SubTitle, SmallTitle, Content } from '../components/GlobalComponents';
 
 //import Grid from '@mui/material/Grid';
 
@@ -72,7 +73,7 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
     const Gimbabs: Data[] = Props.GimbabList;
     return (
         <>
-            <Title>메뉴</Title>
+            <MainTitle>메뉴</MainTitle>
             <GridWrap>
                 <TitleWrap>
                     <SubTitle>시즈널 메뉴<strong><br />Seasonal Menu</strong></SubTitle>
@@ -93,16 +94,16 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
             </GridWrap>
             <GridWrap>
                 <TitleWrap>
-                    <SubTitle>시즈널 메뉴<strong><br />Seasonal Menu</strong></SubTitle>
-                    <p>*시즈널 메뉴는 계절 한정으로 판매됩니다.</p>
+                    <MainTitle>시즈널 메뉴<br /><SubTitle>Seasonal Menu</SubTitle></MainTitle>
+                    <p><SmallTitle>*시즈널 메뉴는 계절 한정으로 판매됩니다.</SmallTitle></p>
                 </TitleWrap>
                 <Grid>
                     {WarmImg.map((item, key) => (
                         <Item key={key}>
                             <Image src={require('../public/meau/meau' + item.imgNum + '.png')} alt="" />
                             <span>
-                                <h5>{item.title}</h5>
-                                <p>{item.description}</p>
+                                <SmallTitle>{item.title}</SmallTitle>
+                                <p><Content>{item.description}</Content></p>
                             </span>
                         </Item>
                     ))}
@@ -178,19 +179,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-const Title = styled.span`
-    text-align: center;
-    font-weight: 300;
-    font-size: 42px;
-    line-height: 1.1em;
-    letter-spacing: -0.02em;
-    color: #333;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    text-align: center;
-    font-weight: normal;
-    display: block;
-`
+// const Title = styled.span`
+//     text-align: center;
+//     font-weight: 300;
+//     font-size: 42px;
+//     line-height: 1.1em;
+//     letter-spacing: -0.02em;
+//     color: #333;
+//     padding-bottom: 20px;
+//     padding-top: 20px;
+//     text-align: center;
+//     font-weight: normal;
+//     display: block;
+// `
 
 const GridWrap = styled.section`
   margin: 0 1em;
@@ -230,13 +231,13 @@ const TextItem = styled.span`
     }
 `
 
-const SubTitle = styled.div`
-    font-weight: 300;
-    font-size: 42px;
-    line-height: 50px;
-    color: #333;
-    text-align: center;
-`
+// const SubTitle = styled.div`
+//     font-weight: 300;
+//     font-size: 42px;
+//     line-height: 50px;
+//     color: #333;
+//     text-align: center;
+// `
 
 const TitleWrap = styled.div`
 text-align: center;
