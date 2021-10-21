@@ -2,6 +2,8 @@ import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferG
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from "react";
+import PageMainTitle from "../../components/PageMainTitle";
 
 type PropsData = {
     storeId: string,
@@ -16,28 +18,32 @@ type PropsData = {
 const Brand = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const stroeList: PropsData[] = Props.stroeList;
     return (
-        <Container>
-            {
-                stroeList.map((item, key) => (
-                    <BoxWrap key={key}>
-                        <Box>
-                            <Link href={`/store/${item.storeId}`}>
-                                <a>
-                                    <Image src={item.url} alt="" width="100%" height="100%" layout="responsive" objectFit="cover" />
-                                    <Wrap>
-                                        <Name>{item.name}</Name>
-                                        <Location>{item.location}</Location>
-                                        <Operation>{item.operation}</Operation>
-                                        <Phonenumber>{item.phonenumber}</Phonenumber>
-                                    </Wrap>
-                                </a>
-                            </Link>
-                        </Box>
+        <>
+            <PageMainTitle title="매장" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다." />
 
-                    </BoxWrap>
-                ))
-            }
-        </Container>
+            <Container>
+                {
+                    stroeList.map((item, key) => (
+                        <BoxWrap key={key}>
+                            <Box>
+                                <Link href={`/store/${item.storeId}`}>
+                                    <a>
+                                        <Image src={item.url} alt="" width="100%" height="100%" layout="responsive" objectFit="cover" />
+                                        <Wrap>
+                                            <Name>{item.name}</Name>
+                                            <Location>{item.location}</Location>
+                                            <Operation>{item.operation}</Operation>
+                                            <Phonenumber>{item.phonenumber}</Phonenumber>
+                                        </Wrap>
+                                    </a>
+                                </Link>
+                            </Box>
+
+                        </BoxWrap>
+                    ))
+                }
+            </Container>
+        </>
     );
 };
 

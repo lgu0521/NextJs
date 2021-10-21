@@ -1,5 +1,7 @@
-import { MainTitle, SubTitle, SmallTitle, Content } from '../components/GlobalComponents';
+import { Title1, Title2, Content } from '../components/GlobalComponents';
 import styled from 'styled-components';
+import React from 'react';
+import PageMainTitle from '../components/PageMainTitle';
 
 const Brand = () => {
     const CONTENT_BOX_STYLE = {
@@ -19,14 +21,10 @@ const Brand = () => {
 
     return (
         <>
-            <ContentBox style={{ ...CONTENT_BOX_STYLE, height: "100px" }}>
-                <ContentWrap>
-                    <MainTitle>브랜드</MainTitle>
-                </ContentWrap>
-            </ContentBox>
+            <PageMainTitle title="브랜드" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다." />
             <ContentBox style={{ ...CONTENT_BOX_STYLE, backgroundImage: "url('http://www.saladykorea.com/images/fran-infobox-bg1.jpg')" }}>
                 <ContentWrap>
-                    <SubTitle style={CONTENT_TITLE_STYLE}>회사소개</SubTitle>
+                    <Title2 style={CONTENT_TITLE_STYLE}>회사소개</Title2>
                     <Content style={FONT_STYLE}>
                         <ContentUnit>
                             비오키친은 저탄고지 키토김밥과 고단백 저칼로리 다이어트 도시락, 한끼 샐러드 및 0칼로리 이온음료등을 판매하는 다이어트 푸드 전문점입니다.
@@ -39,7 +37,7 @@ const Brand = () => {
             </ContentBox>
             <ContentBox style={{ ...CONTENT_BOX_STYLE, backgroundImage: "url('http://www.saladykorea.com/images/fran-infobox-bg2.jpg')" }}>
                 <ContentWrap>
-                    <SubTitle style={CONTENT_TITLE_STYLE}>식자재</SubTitle>
+                    <Title2 style={CONTENT_TITLE_STYLE}>식자재</Title2>
                     <Content style={FONT_STYLE}>
                         <ContentUnit>
                             매일 재료를 직접 눈으로 보고 관리합니다. 도시락에 들어가는 현미는 철원 산지에서, 호박고구마는 당진에서, 사과는 청송에서등 최대한 산지직송 식자재를 사용합니다. 내 가족이 먹는다는 마음으로 꼼꼼하게 관리 및 조리하고 있습니다.
@@ -49,7 +47,7 @@ const Brand = () => {
             </ContentBox>
             <ContentBox style={{ ...CONTENT_BOX_STYLE, backgroundImage: "url('http://www.saladykorea.com/images/fran-infobox-bg3.jpg')", height: "500px" }}>
                 <ContentWrap>
-                    <SubTitle style={CONTENT_TITLE_STYLE}>가능성</SubTitle>
+                    <Title2 style={CONTENT_TITLE_STYLE}>가능성</Title2>
                     <Content style={FONT_STYLE}>
                         <StepList>
                             <StepListItem>

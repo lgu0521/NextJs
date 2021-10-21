@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const MainTitle = styled.span`
+const Title1 = styled.span`
 @media only screen and (max-width: 600px) {
     font-size: ${props => props.theme.fontSizes.xl};;
 }
@@ -19,7 +19,7 @@ const MainTitle = styled.span`
 color: #333;
 `;
 
-const SubTitle = styled.span`
+const Title2 = styled.span`
 @media only screen and (max-width: 600px) {
     font-size: ${props => props.theme.fontSizes.lg};;
 }
@@ -38,7 +38,7 @@ const SubTitle = styled.span`
 color: #333;
 `;
 
-const SmallTitle = styled.span`
+const Title3 = styled.span`
 @media only screen and (max-width: 600px) {
     font-size: ${props => props.theme.fontSizes.md};;
 }
@@ -76,4 +76,4 @@ const Content = styled.span`
 color: #333;
 `;
 
-export { MainTitle, SubTitle, SmallTitle, Content };
+export { Title1, Title2, Title3, Content };

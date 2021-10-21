@@ -2,7 +2,9 @@ import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferG
 import Image from 'next/image';
 import styled from 'styled-components';
 import seasonal from '../public/meau/seasonal_bot_img.jpeg'
-import { MainTitle, SubTitle, SmallTitle, Content } from '../components/GlobalComponents';
+import { Title1, Title2, Title3, Content } from '../components/GlobalComponents';
+import React from 'react';
+import PageMainTitle from '../components/PageMainTitle';
 
 //import Grid from '@mui/material/Grid';
 
@@ -73,10 +75,10 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
     const Gimbabs: Data[] = Props.GimbabList;
     return (
         <>
-            <MainTitle>메뉴</MainTitle>
+            <PageMainTitle title="메뉴" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다."/>
             <GridWrap>
                 <TitleWrap>
-                    <SubTitle>시즈널 메뉴<strong><br />Seasonal Menu</strong></SubTitle>
+                    <Title2>시즈널 메뉴<strong><br />Seasonal Menu</strong></Title2>
                     <p>*시즈널 메뉴는 계절 한정으로 판매됩니다.</p>
                 </TitleWrap>
                 <Grid>
@@ -94,15 +96,15 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
             </GridWrap>
             <GridWrap>
                 <TitleWrap>
-                    <MainTitle>시즈널 메뉴<br /><SubTitle>Seasonal Menu</SubTitle></MainTitle>
-                    <p><SmallTitle>*시즈널 메뉴는 계절 한정으로 판매됩니다.</SmallTitle></p>
+                    <Title1>시즈널 메뉴<br /><Title2>Seasonal Menu</Title2></Title1>
+                    <p><Title3>*시즈널 메뉴는 계절 한정으로 판매됩니다.</Title3></p>
                 </TitleWrap>
                 <Grid>
                     {WarmImg.map((item, key) => (
                         <Item key={key}>
                             <Image src={require('../public/meau/meau' + item.imgNum + '.png')} alt="" />
                             <span>
-                                <SmallTitle>{item.title}</SmallTitle>
+                                <Title3>{item.title}</Title3>
                                 <p><Content>{item.description}</Content></p>
                             </span>
                         </Item>
@@ -112,7 +114,7 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
             <Image src={seasonal} alt="" />
             <GridWrap>
                 <TitleWrap>
-                    <SubTitle>Make Your Own Salady</SubTitle>
+                    <Title2>Make Your Own Salady</Title2>
                     <p>*기본 베이스인 '채소볼' 또는 '곡물볼'을 선택하여 기호에 맞게 커스터마이징(customizing) 해서 즐기세요!</p>
                 </TitleWrap>
                 <Grid>
@@ -128,7 +130,7 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
             </GridWrap>
             <GridWrap>
                 <TitleWrap>
-                    <SubTitle>서브 토핑 Sub Topping</SubTitle>
+                    <Title2>서브 토핑 Sub Topping</Title2>
                     <p>*토핑 추가는 메인토핑과 서브토핑 포함 최대 5개까지 가능합니다.</p>
                 </TitleWrap>
                 <Grid>
@@ -144,7 +146,7 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
             </GridWrap>
             <GridWrap>
                 <TitleWrap>
-                    <SubTitle>드레싱 Dressing</SubTitle>
+                    <Title2>드레싱 Dressing</Title2>
                     <p>*드레싱은 모두 샐러디만의 레시피로 만들어졌으며, 주문 시 변경이 가능합니다.</p>
                 </TitleWrap>
                 <Grid>

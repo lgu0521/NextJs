@@ -1,4 +1,3 @@
-import { enableMultiTabIndexedDbPersistence } from "firebase/firestore";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { StartUpFormDTO } from "../../dto/startup-form.dto";
 
@@ -7,6 +6,7 @@ const StartupList = (Props: InferGetServerSidePropsType<typeof getServerSideProp
     console.log(Props);
     return (
         <div>
+
             {formList.map((item, key) => (
                 <div key={key}>
                     <p>{item.name}</p>
@@ -18,9 +18,11 @@ const StartupList = (Props: InferGetServerSidePropsType<typeof getServerSideProp
                 </div>
             ))
             }
+
         </div>
     );
 };
+
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const resData = await fetch("http://localhost:3000/api/startup-form/getlist");
