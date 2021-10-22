@@ -1,32 +1,25 @@
-import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
+import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage } from "next";
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from "react";
 import PageMainTitle from "../../components/PageMainTitle";
+import { StoreListDTO } from '../../dto/store-create.dto';
 
-type PropsData = {
-    storeId: string,
-    name: string,
-    location: string,
-    operation: string,
-    phonenumber: string,
-    url: string
+interface Props {
+    storeList :StoreListDTO[]
 }
-
-
-const Brand = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-    const stroeList: PropsData[] = Props.stroeList;
+const Brand:NextPage<Props> = ({storeList}) => {
     return (
         <>
             <PageMainTitle title="매장" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다." />
 
             <Container>
                 {
-                    stroeList.map((item, key) => (
+                    storeList.map((item, key) => (
                         <BoxWrap key={key}>
                             <Box>
-                                <Link href={`/store/${item.storeId}`}>
+                                <Link href={`/store/${item.id}`}>
                                     <a>
                                         <Image src={item.url} alt="" width="100%" height="100%" layout="responsive" objectFit="cover" />
                                         <Wrap>
@@ -130,16 +123,16 @@ letter-spacing: -0.025em;
 `
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const res = await fetch('http://localhost:3000/api/store');
-    const stroeList: PropsData[] = await res.json();
+    const storeList: StoreListDTO[] = await res.json();
 
-    if (!stroeList) {
+    if (!storeList) {
         return {
             notFound: true,
         }
     }
     return {
         props: {
-            stroeList
+            storeList
         }
 
     }

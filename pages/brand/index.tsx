@@ -1,7 +1,7 @@
-import { Title1, Title2, Content } from '../components/GlobalComponents';
+import { Title1, Title2, Content } from '../../components/GlobalComponents';
 import styled from 'styled-components';
 import React from 'react';
-import PageMainTitle from '../components/PageMainTitle';
+import PageMainTitle from '../../components/PageMainTitle';
 
 const Brand = () => {
     const CONTENT_BOX_STYLE = {

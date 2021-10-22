@@ -2,10 +2,10 @@ import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferG
 import Image from 'next/image';
 import styled from 'styled-components';
 import seasonal from '../public/meau/seasonal_bot_img.jpeg'
-import { Title1, Title2, Title3, Content } from '../components/GlobalComponents';
+import { Title1, Title2, Title3, Content } from '../../components/GlobalComponents';
 import React from 'react';
-import PageMainTitle from '../components/PageMainTitle';
-import { MenuListDTO } from '../dto/menu-create.dto';
+import PageMainTitle from '../../components/PageMainTitle';
+import { MenuListDTO } from '../../dto/menu-create.dto';
 
 //import Grid from '@mui/material/Grid';
 

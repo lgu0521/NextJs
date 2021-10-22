@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { StartUpFormDTO } from "../dto/startup-form.dto";
-import GridBox from "../components/GridBox";
+import { StartUpFormDTO } from "../../dto/startup-form.dto";
+import GridBox from "../../components/GridBox";
 import styled from "styled-components";
-import { Title1 } from "../components/GlobalComponents";
-import PageMainTitle from "../components/PageMainTitle";
+import { Title1 } from "../../components/GlobalComponents";
+import PageMainTitle from "../../components/PageMainTitle";
 interface BoxItem {
     step: string,
     procedure: string,
