@@ -76,4 +76,32 @@ const Content = styled.span`
 color: #333;
 `;
 
-export { Title1, Title2, Title3, Content };
+export { Title1, Title2, Title3, Content , Button};
+
+interface PropsType {
+    width?: string;
+}
+
+
+const Button = styled.button < PropsType > `
+    padding: 15px 10px;
+    text-align: center;
+    margin-top: 30px;
+    border-radius: 30px;
+    border: 0px;
+    height: 60px;
+    ${({ width }) => {
+        return width ? `width: ${width};` : 'width: 70%;';
+    }
+    }
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #009223;
+    &:hover {
+        background-color: #ffce32;
+        transition: background-color 0.3s;
+        -webkit-transition: background-color 0.3s;
+    };
+    cursor: pointer;
+`;

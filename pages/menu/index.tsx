@@ -1,7 +1,7 @@
 import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage } from 'next';
 import Image from 'next/image';
 import styled from 'styled-components';
-import seasonal from '../public/meau/seasonal_bot_img.jpeg'
+import seasonal from '../../public/menu/seasonal_bot_img.jpeg';
 import { Title1, Title2, Title3, Content } from '../../components/GlobalComponents';
 import React from 'react';
 import PageMainTitle from '../../components/PageMainTitle';

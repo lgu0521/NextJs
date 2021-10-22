@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Title3, Content } from './GlobalComponents';
+import { Title2, Title3 } from './GlobalComponents';
 
 interface BoxItem {
     step: string,
@@ -23,12 +23,18 @@ const GridBox = ({ boxItems, height, col, mdCol, smCol }: GridProps) => {
         <>
             { boxItems.map((item, key) => (
                 <GridItem key={key} height={height} col={col} mdCol={mdCol} smCol={smCol}>
-                    <Title3 style={FONT_STYLE}>
-                        <p>{item.step}</p>
+                    <GridWrap>
+                    <Wrap>
+                    <Title2 style={FONT_STYLE}>
+                        {item.step}
+                    </Title2>
+                    </Wrap>
+                    <Wrap>
+                    <Title3>
+                        {item.procedure}
                     </Title3>
-                    <Content>
-                        <p>{item.procedure}</p>
-                    </Content>
+                    </Wrap>
+                    </GridWrap>
                 </GridItem>
             ))
             }
@@ -42,13 +48,22 @@ const FONT_STYLE = {
 
 }
 
+const Wrap = styled.div`
+margin: 7px 0;
+`
+const GridWrap = styled.div`
+display: table-cell;
+vertical-align: middle;
+`
+
 const GridItem = styled.div<GridItemProps>`
     height: ${(props) => props.height ? props.height : '100px'};
-    display:inline-block;
+    display: table;
     margin: 10px;
     box-sizing: border-box;
     background: #f7f7f7;
-
+    text-align: center;
+    float: left;
     @media only screen and (max-width: 600px) {
         padding: 10px 10px;
         width: calc(100%/${(props) => props.smCol ? props.smCol : 2} - 23px);

@@ -100,7 +100,7 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/meau">
+                                <Link href="/menu">
                                     <a>메뉴</a>
                                 </Link>
                             </Li>
@@ -110,7 +110,7 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/startup-guide">
+                                <Link href="/startup">
                                     <a>창업안내</a>
                                 </Link>
                             </Li>
@@ -137,7 +137,7 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/meau">
+                                <Link href="/menu">
                                     <a>메뉴</a>
                                 </Link>
                             </Li>
@@ -147,7 +147,7 @@ const Header = () => {
                                 </Link>
                             </Li>
                             <Li>
-                                <Link href="/startup-guide">
+                                <Link href="/startup">
                                     <a>창업안내</a>
                                 </Link>
                             </Li>

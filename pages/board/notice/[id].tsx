@@ -41,15 +41,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }: Params)
         }
     }
 }
-// export const getStaticPaths: GetStaticPaths = async () => {
-//     const res = await fetch("http://localhost:3000/api/notice/getlist");
-//     const resJson: Id[] = await res.json();
-
-//     const paths = resJson.map((item) => ({
-//         params: { id: item.id },
-//     }));
-//     return { paths, fallback: false }
-// }
 
 
 

@@ -10,6 +10,7 @@ const CreateStartUpForm = async (req: NextApiRequest, res: NextApiResponse) => {
             const firestore = getFirestore(firebase);
             const reqBody:StartUpFormDTO = JSON.parse(req.body);
             const newDocRef = doc(collection(firestore, "StartupForm"));
+            console.log(reqBody);
             const docData:StartUpFormDTO = {
                 name: reqBody.name,
                 phonenumber: reqBody.phonenumber,
