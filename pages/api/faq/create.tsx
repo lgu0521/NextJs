@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getFirestore, doc, setDoc, Timestamp, collection } from "firebase/firestore";
 import firebase from '../../../service/firebase';
-import { BannerCreateDTO, BannerDTO } from "../../../dto/banner-create.dto";
+import { FaqCreateDTO } from "../../../dto/faq-create.dto";
 
 
 
@@ -9,15 +9,16 @@ const CreateBanner = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         try {
             const firestore = getFirestore(firebase);
-            const reqBody:BannerCreateDTO = JSON.parse(req.body);
-            const newDocRef = doc(collection(firestore, "Banner"));
+            const reqBody:FaqCreateDTO = JSON.parse(req.body);
+            const newDocRef = doc(collection(firestore, "Faq"));
 
-            const docData:BannerDTO = {
+            const docData:FaqCreateDTO = {
                 order: reqBody.order,
-                url: reqBody.url
-            }
-            const docRef = await setDoc(newDocRef, docData);
+                title: reqBody.title,
+                content: reqBody.content
+            };
 
+            const docRef = await setDoc(newDocRef, docData);
             res.status(200).json({ message: "success" });
         } catch (e) {
             console.log("실패: " + e);

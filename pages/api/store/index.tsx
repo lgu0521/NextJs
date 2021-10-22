@@ -1,26 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import firebase from '../../../service/firebase';
-import { StoreInfoDTO } from '../../../dto/store-create.dto';
+import { StoreListDTO } from '../../../dto/store-create.dto';
 
-const StoreList = async (req: NextApiRequest, res: NextApiResponse<Array<StoreInfoDTO>>) => {
+const GetStoreList = async (req: NextApiRequest, res: NextApiResponse<Array<StoreListDTO>>) => {
   const firestore = getFirestore(firebase);
-  var resJsonArray = [] as StoreInfoDTO[];
+  var resJsonArray = [] as StoreListDTO[];
   try {
     const querySnapshot = await getDocs(collection(firestore, 'Store'));
-
     querySnapshot.forEach((item) => {
-      var temporary = {} as StoreInfoDTO;
-      temporary.storeId = item.id;
-      temporary.name = item.data().name;
-      temporary.location = item.data().location;
-      temporary.operation = item.data().operation;
-      temporary.phonenumber = item.data().phonenumber;
-      temporary.url = item.data().url[0];
-      resJsonArray.push(temporary);
+      const docData: StoreListDTO = {
+        id: item.id,
+        name: item.data().name,
+        location: item.data().location,
+        operation: item.data().operation,
+        phonenumber: item.data().phonenumber,
+        url: item.data().url[0]
+      }
+      resJsonArray.push(docData);
     });
-
-    console.log(resJsonArray);
 
     res.status(200).json(resJsonArray);
   } catch (e) {
@@ -29,4 +27,4 @@ const StoreList = async (req: NextApiRequest, res: NextApiResponse<Array<StoreIn
 }
 
 
-export default StoreList;
+export default GetStoreList;

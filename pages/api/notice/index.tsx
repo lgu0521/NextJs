@@ -1,30 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import firebase from '../../../service/firebase';
+import { NoticeListDTO } from '../../../dto/notice-create.dto';
 
-type Data = {
-  id: string,
-  title: string,
-  content: string,
-  datetime: string,
-}
-
-const NoticeList = async (req: NextApiRequest, res: NextApiResponse<Array<Data>>) => {
+const NoticeList = async (req: NextApiRequest, res: NextApiResponse<Array<NoticeListDTO>>) => {
   const firestore = getFirestore(firebase);
-  var resJsonArray = [] as Data[];
+  var resJsonArray = [] as NoticeListDTO[];
+
   try {
     const querySnapshot = await getDocs(collection(firestore, 'Notice'));
-
     querySnapshot.forEach((item) => {
-      var temporary = {} as Data;
-      temporary.id = item.id;
-      temporary.title = item.data().title;
-      temporary.content = item.data().content;
-      temporary.datetime = item.data().datetime;
-      resJsonArray.push(temporary);
+      const docData: NoticeListDTO = {
+        id: item.id,
+        title: item.data().title,
+        content: item.data().content,
+        datetime: item.data().datetime,
+      }
+      resJsonArray.push(docData);
     });
-
-    console.log(resJsonArray);
 
     res.status(200).json(resJsonArray);
   } catch (e) {

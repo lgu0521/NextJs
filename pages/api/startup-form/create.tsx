@@ -4,13 +4,13 @@ import firebase from '../../../service/firebase';
 import { StartUpFormDTO } from "../../../dto/startup-form.dto";
 
 
-const Form = async (req: NextApiRequest, res: NextApiResponse) => {
+const CreateStartUpForm = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         try {
             const firestore = getFirestore(firebase);
             const reqBody:StartUpFormDTO = JSON.parse(req.body);
-            const newDocRef = doc(collection(firestore, "RequestForm"));
-            const docData = {
+            const newDocRef = doc(collection(firestore, "StartupForm"));
+            const docData:StartUpFormDTO = {
                 name: reqBody.name,
                 phonenumber: reqBody.phonenumber,
                 area: reqBody.area,
@@ -29,4 +29,4 @@ const Form = async (req: NextApiRequest, res: NextApiResponse) => {
     
 }
 
-export default Form;
+export default CreateStartUpForm;

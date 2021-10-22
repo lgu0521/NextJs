@@ -6,3 +6,7 @@ export interface StartUpFormDTO{
     openday: string,
     money: string;
 }
+
+export interface StartUpFormListDTO extends StartUpFormDTO{
+    id: string
+}

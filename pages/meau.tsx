@@ -1,10 +1,11 @@
-import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType } from 'next';
+import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage } from 'next';
 import Image from 'next/image';
 import styled from 'styled-components';
 import seasonal from '../public/meau/seasonal_bot_img.jpeg'
 import { Title1, Title2, Title3, Content } from '../components/GlobalComponents';
 import React from 'react';
 import PageMainTitle from '../components/PageMainTitle';
+import { MenuListDTO } from '../dto/menu-create.dto';
 
 //import Grid from '@mui/material/Grid';
 
@@ -65,30 +66,28 @@ const Topping = [
     },
 ];
 
-type Data = {
-    image: string,
-    title: string,
-    description: string
+interface Props {
+    GimbabList: MenuListDTO[]
 };
 
-const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-    const Gimbabs: Data[] = Props.GimbabList;
+const Meau:NextPage<Props> = ({GimbabList}) => {
+    console.log(GimbabList);
     return (
         <>
-            <PageMainTitle title="메뉴" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다."/>
+            <PageMainTitle title="메뉴" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다." />
             <GridWrap>
                 <TitleWrap>
                     <Title2>시즈널 메뉴<strong><br />Seasonal Menu</strong></Title2>
                     <p>*시즈널 메뉴는 계절 한정으로 판매됩니다.</p>
                 </TitleWrap>
                 <Grid>
-                    {Gimbabs.map((item, key) => (
+                    {GimbabList.map((item, key) => (
                         <Item key={key}>
-                            <Image src="http://192.168.219.103:8000/images/menu1.png" alt="" height={340}
+                            <Image src={item.url} alt="" height={340}
                                 width={380} layout="intrinsic" />
                             <span>
                                 <h5>{item.title}</h5>
-                                <p>{item.description}</p>
+                                <p>{item.content}</p>
                             </span>
                         </Item>
                     ))}
@@ -100,12 +99,13 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
                     <p><Title3>*시즈널 메뉴는 계절 한정으로 판매됩니다.</Title3></p>
                 </TitleWrap>
                 <Grid>
-                    {WarmImg.map((item, key) => (
+                {GimbabList.map((item, key) => (
                         <Item key={key}>
-                            <Image src={require('../public/meau/meau' + item.imgNum + '.png')} alt="" />
+                            <Image src={item.url} alt="" height={340}
+                                width={380} layout="intrinsic" />
                             <span>
-                                <Title3>{item.title}</Title3>
-                                <p><Content>{item.description}</Content></p>
+                                <h5>{item.title}</h5>
+                                <p>{item.content}</p>
                             </span>
                         </Item>
                     ))}
@@ -165,8 +165,8 @@ const Meau = (Props: InferGetServerSidePropsType<typeof getServerSideProps>) => 
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const res = await fetch("http://localhost:3000/api/menu/gimbab");
-    const GimbabList: Data[] = await res.json();
+    const res = await fetch("http://localhost:3000/api/menu/Gimbab");
+    const GimbabList: MenuListDTO[] = await res.json();
 
     if (!GimbabList) {
         return {
@@ -218,14 +218,6 @@ const TextItem = styled.span`
         width: calc(25% - 23px);
     }
 `
-
-// const SubTitle = styled.div`
-//     font-weight: 300;
-//     font-size: 42px;
-//     line-height: 50px;
-//     color: #333;
-//     text-align: center;
-// `
 
 const TitleWrap = styled.div`
 text-align: center;

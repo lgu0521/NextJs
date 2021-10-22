@@ -1,16 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getFirestore, doc, setDoc, Timestamp, collection } from "firebase/firestore";
 import firebase from '../../../service/firebase';
-import { StoreCreateDTO } from "../../../dto/store-create.dto";
+import { StoreCreateDTO,StoreDTO } from "../../../dto/store-create.dto";
 
-
-const Form = async (req: NextApiRequest, res: NextApiResponse) => {
+const CreateStore = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         try {
             const firestore = getFirestore(firebase);
             const reqBody:StoreCreateDTO = JSON.parse(req.body);
             const newDocRef = doc(collection(firestore, "Store"));
-            const docData = {
+            const docData :StoreDTO= {
                 name: reqBody.name,
                 phonenumber: reqBody.phonenumber,
                 location: reqBody.location,
@@ -27,4 +26,4 @@ const Form = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 }
 
-export default Form;
+export default CreateStore;
