@@ -1,7 +1,7 @@
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
 import Style from './board.style';
 import Link from 'next/link';
-import PageNationView from '../../components/PageNationView';
+import PageNationListView from '../../components/PageNationListView';
 import AccordionListView from '../../components/AccordionListView';
 import PageMainTitle from '../../components/PageMainTitle';
 import { useState } from "react";
@@ -20,8 +20,8 @@ const BrandPage: NextPage<Props> = ({ noticeList, faqList }) => {
         <>
             <PageMainTitle title="게시판" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다." />
             <PageLayout>
-                <Style.TabButton onClick={() => { setIsFaq(true); setIsNotice(false) }}>FAQ</Style.TabButton>
-                <Style.TabButton onClick={() => { setIsFaq(false); setIsNotice(true) }}>공지사항</Style.TabButton>
+                <Style.TabButton isOpen={isFaq} onClick={() => { setIsFaq(true); setIsNotice(false) }}>FAQ</Style.TabButton>
+                <Style.TabButton isOpen={isNotice}  onClick={() => { setIsFaq(false); setIsNotice(true) }}>공지사항</Style.TabButton>
             </PageLayout>
             <PageLayout>
                     {
@@ -33,7 +33,7 @@ const BrandPage: NextPage<Props> = ({ noticeList, faqList }) => {
                         </> : null
                     }
                     {
-                        isNotice ? <PageNationView itemList={noticeList} pageSize={10} /> : null
+                        isNotice ? <PageNationListView itemList={noticeList} pageSize={5} /> : null
                     }
             </PageLayout>
         </>
@@ -62,3 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 }
 export default BrandPage;
+
+
+
+

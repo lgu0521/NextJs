@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from "react";
 import PageMainTitle from "../../components/PageMainTitle";
-import { StoreListDTO } from '../../dto/store-create.dto';
+import { StoreAllListDTO } from '../../dto/store-create.dto';
 
 interface Props {
-    storeList :StoreListDTO[]
+    storeList :StoreAllListDTO[]
 }
 const Brand:NextPage<Props> = ({storeList}) => {
     return (
@@ -123,7 +123,7 @@ letter-spacing: -0.025em;
 `
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const res = await fetch('http://localhost:3000/api/store');
-    const storeList: StoreListDTO[] = await res.json();
+    const storeList: StoreAllListDTO[] = await res.json();
 
     if (!storeList) {
         return {

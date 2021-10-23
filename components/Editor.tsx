@@ -9,3 +9,4 @@ export interface TuiEditorWithForwardedProps extends EditorProps {
 export default (props: TuiEditorWithForwardedProps) => (
   <Editor {...props} ref={props.forwardedRef} />
 ); 
+
