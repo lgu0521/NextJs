@@ -76,7 +76,7 @@ const Content = styled.span`
 color: #333;
 `;
 
-export { Title1, Title2, Title3, Content , Button};
+export { Title1, Title2, Title3, Content , Button, PageLayout};
 
 interface PropsType {
     width?: string;
@@ -97,7 +97,7 @@ const Button = styled.button < PropsType > `
     color: white;
     font-size: 18px;
     font-weight: bold;
-    background-color: #009223;
+    background-color: #175436;
     &:hover {
         background-color: #ffce32;
         transition: background-color 0.3s;
@@ -105,3 +105,18 @@ const Button = styled.button < PropsType > `
     };
     cursor: pointer;
 `;
+
+const PageLayout = styled.div`
+    display: block;
+    width:100%;
+    padding: 30px 10px;
+    overflow: auto;
+    text-align: center;
+    margin: 0 auto;
+    @media only screen and (max-width: 768px) {
+        width: auto;
+    }
+    @media only screen and (min-width: 1200px) {
+        width: 1200px;
+    }
+`

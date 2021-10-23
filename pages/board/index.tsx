@@ -7,6 +7,7 @@ import PageMainTitle from '../../components/PageMainTitle';
 import { useState } from "react";
 import { NoticeListDTO } from '../../dto/notice-create.dto';
 import { FaqListDTO } from '../../dto/faq-create.dto';
+import { PageLayout } from '../../components/GlobalComponents';
 interface Props {
     noticeList: NoticeListDTO[],
     faqList: FaqListDTO[]
@@ -15,29 +16,26 @@ interface Props {
 const BrandPage: NextPage<Props> = ({ noticeList, faqList }) => {
     const [isFaq, setIsFaq] = useState(true);
     const [isNotice, setIsNotice] = useState(false);
-    console.log(noticeList);
     return (
         <>
             <PageMainTitle title="게시판" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다." />
-            <Style.ContentBox>
+            <PageLayout>
                 <Style.TabButton onClick={() => { setIsFaq(true); setIsNotice(false) }}>FAQ</Style.TabButton>
                 <Style.TabButton onClick={() => { setIsFaq(false); setIsNotice(true) }}>공지사항</Style.TabButton>
-            </Style.ContentBox>
-            <Style.ContentBox>
-                <Style.ContentWrap>                
+            </PageLayout>
+            <PageLayout>
                     {
-                    isFaq ? <>
-                        {
-                            noticeList.map(item => (
-                                <AccordionListView {...item} />
-                            ))}
-                    </> : null
-                }
-                {
-                    isNotice ? <><PageNationView itemList={noticeList} pageSize={10} /></> : null
-                }</Style.ContentWrap>
-
-            </Style.ContentBox>
+                        isFaq ? <>
+                            {
+                                noticeList.map(item => (
+                                    <AccordionListView {...item} />
+                                ))}
+                        </> : null
+                    }
+                    {
+                        isNotice ? <PageNationView itemList={noticeList} pageSize={10} /> : null
+                    }
+            </PageLayout>
         </>
     );
 };

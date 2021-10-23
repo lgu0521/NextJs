@@ -5,62 +5,111 @@ import styled from "styled-components";
 const Label = styled.label `
 font-size: 15px;
 `
-const Input = styled.input `
+const Input = styled.input`
+width:100%;
 height: 100%;
-width: 250px;
 border: 0px;
-border-bottom:2px solid #009223;
-padding: 0px 10px;
+border-bottom:2px solid #175436;
+padding: 10px;
 font-size: 15px;
 &:focus{
     outline: none;
 }
+
 `
 
 const Select = styled.select`
+width:100%;
 height: 100%;
-width: 300px;
 font-size: 15px;
 padding: 10px;
 background: url("https://eggdrop.co.kr/assets/images/common/icon_select.svg") no-repeat right 15px center/20px auto;;
 -webkit-appearance: none;
 border:0px;
-border-bottom:2px solid #009223;
+border-bottom:2px solid #175436;
 `
 
 
 const Option = styled.option`
 `
 
-const InputDIV = styled.div `
-display:table;
-vertical-align: middle;
+const InputDIV = styled.tr `
 height: 30px;
-margin: 30px;
-&:focus{
-    outline: none;
-}
 `
 
+const Table = styled.table`
+margin: 0 auto;
+`
 const Button = styled.button `
 `
 const FormStyle = styled.form `
     display: inline-block;
     width: 100%;
-    overflow: scroll;
+`
+const Col1 = styled.col`
+    @media only screen and (max-width: 600px) {
+        width: 40%;
+    }
+
+    @media only screen and (min-width: 600px) {
+        width: 40%;
+    }
+
+    @media only screen and (min-width: 768px) {
+        width: 50%;
+    }
+
+    @media only screen and (min-width: 992px) {
+        width: 30%;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        width: 30%;
+    }
+`
+
+const Col2 = styled.col`
+    @media only screen and (max-width: 600px) {
+        width: 60%;
+    }
+
+    @media only screen and (min-width: 600px) {
+        width: 60%;
+    }
+
+    @media only screen and (min-width: 768px) {
+        width: 50%;
+    }
+
+    @media only screen and (min-width: 992px) {
+        width: 70%;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        width: 70%;
+    }
+`
+const Th = styled.th`
+text-align: left;
 `
 
 const Form = ({defaultValues, children, onSubmit} : any) => {
     const methods = useForm({defaultValues});
     const {handleSubmit} = methods;
     return (
+        
         <FormStyle onSubmit={
             handleSubmit(onSubmit)
-        }>
+        }><Table>
+            <colgroup>
+            <Col1/>
+            <Col2/>
+            </colgroup>
             {
             React.Children.map(children, (child) => {
+                console.log(child.type);
                 return child.props.name ? (
-                    <div> {
+                    <>{
                         React.createElement(child.type, {
                             ...{
                                 ...child.props,
@@ -68,10 +117,12 @@ const Form = ({defaultValues, children, onSubmit} : any) => {
                                 key: child.props.name
                             }
                         })
-                    } </div>
+                    }</>
                 ) : (child);
             })
-        } </FormStyle>
+        } 
+        </Table></FormStyle>
+        
     );
 };
 
@@ -83,8 +134,8 @@ const InputForm = ({
 } : any) => {
     return (
         <InputDIV>
-            <Label>{label}</Label>
-            <Input {...register(name)} {...rest}/>
+            <Th><Label>{label}</Label></Th>
+            <Th><Input {...register(name)} {...rest}/></Th>
         </InputDIV>
     );
 };
@@ -109,15 +160,15 @@ const SelectForm = ({
 } : SelectProps) => {
     return (
         <InputDIV>
-            <Label>{label}</Label>
-            <Select {...register(name)}>
+            <Th><Label>{label}</Label></Th>
+           <Th> <Select {...register(name)}>
                 {
                     options.map(item => {
                         return <Option value={item.value}>{item.value}</Option>
                     })
                 }
 
-            </Select>
+            </Select></Th>
         </InputDIV>
     );
 };
