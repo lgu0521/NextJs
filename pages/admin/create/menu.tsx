@@ -7,7 +7,7 @@ const AdminCreateMeau = () => {
     const onSubmit = async (data: MenuCreateDTO) => {
         const url = await GetSingleDownloadUrl(data.tmpUrl);
         data.url = url;
-        const res = await fetch("http://localhost:3000/api/menu/create", {
+        const res = await fetch(process.env.API_URL + "api/menu/create", {
             method: 'POST',
             body: JSON.stringify(data)
         });
@@ -26,7 +26,7 @@ const AdminCreateMeau = () => {
                 <label>메뉴 이름</label>
                 <input placeholder="메뉴 이름을 입력해주세요" {...register("title")} />
                 <label>설명</label>
-                <input placeholder="메뉴에 대해 짧은 설명문을 입력해주세요" {...register("description")} />
+                <input placeholder="메뉴에 대해 짧은 설명문을 입력해주세요" {...register("content")} />
                 <label>이미지</label>
                 <input type="file" {...register("tmpUrl", { required: true })} />
                 {errors.tmpUrl && <span>1개 이상의 이미지를 올려주세요!</span>}

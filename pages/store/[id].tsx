@@ -1,37 +1,46 @@
 import React from 'react';
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next';
 import { Params } from 'next/dist/server/router';
-import SimpleImageSlider from "react-simple-image-slider";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from 'styled-components';
 import { StoreDTO } from '../../dto/store-create.dto';
+import { PageLayout, Title2, Title3, Title4 } from '../../components/GlobalComponents';
+import Image from 'next/image'
 
 interface Props {
     store: StoreDTO
 }
-const StoreDetailPage:NextPage<Props> = ({store}) => {
-    const ImageUrl = store.url.map((item, key) => {
-        return { "url": item }
-    });
+const StoreDetailPage: NextPage<Props> = ({ store }) => {
+
     return (
-        <Container>
+        <PageLayout>
             <BoxWrap>
-                <Box>
-                    <SimpleImageSlider width={550} height={400} images={ImageUrl} showNavs={true} showBullets={true} />
-                    <Wrap>
-                        <Name>{store.name}</Name>
-                        <Location>{store.location}</Location>
-                        <Operation>{store.operation}</Operation>
-                        <Phonenumber>{store.phonenumber}</Phonenumber>
-                    </Wrap>
-                </Box>
+                <Wrap>
+                    <Carousel showThumbs={false} swipeable={true}>
+                        {
+                            store.url.map((item, key) => (
+                                <div key={key}>
+                                    <Image src={item} alt="" />
+                                </div>
+                            ))
+                        }
+                    </Carousel>
+                </Wrap>
+                <Wrap style={{ padding: "50px 35px" }}>
+                    <Title2 style={{ color: "#494949", marginBottom: "15px" }}>{store.name}</Title2>
+                    <Title3 style={{ color: "#7e7e7e", marginBottom: "5px" }}>{store.location}</Title3>
+                    <Title4 style={{ color: "#a68537", marginBottom: "15px" }}>{store.operation}</Title4>
+                    <Title2 style={{ color: "#666" }}>{store.phonenumber}</Title2>
+                </Wrap>
             </BoxWrap>
-        </Container>
+        </PageLayout>
     );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }: Params) => {
     const { id } = params;
-    const res = await fetch(`http://localhost:3000/api/store/${id}`);
+    const res = await fetch(process.env.API_URL + `/api/store/${id}`);
     const store = await res.json();
 
     if (!store) {
@@ -47,66 +56,25 @@ export const getServerSideProps: GetServerSideProps = async ({ params }: Params)
     }
 }
 
-const Container = styled.div`
- @media only screen and (max-width: 768px) {
-        width: auto;
-    }
-    @media only screen and (min-width: 1200px) {
-        width: 1200px;
-    }
-    justify-content: center;
-    text-align: center;
-    margin: 70px auto 100px;
-`
 const BoxWrap = styled.div`
-display: inline-block;
-border: 1px solid #ddd;
+    display: block;
+    width: 100%;
+    border: 1px solid #ddd;
+
 `
 
-const Box = styled.div`
-display: flex;
-`
 const Wrap = styled.div`
-padding: 50px 35px;
-text-align: left;
-`
-
-const Name = styled.p`
-font-size:${props => props.theme.fontSizes.titleSize};
-color: #494949;
-letter-spacing: -0.025em;
-margin-bottom: 30px;
-@media only screen and (max-width: 320px) {
-    font-size:${props => props.theme.fontSizes.xxl} !important;
+    text-align: left;
+    vertical-align: top;
+    display: inline-block;
+    @media only screen and (max-width: 600px) {
+        width: 100%;
     }
-`
-
-const Location = styled.p`
-font-size:${props => props.theme.fontSizes.xl};
-color:#7e7e7e;
-letter-spacing: -0.025em;
-margin-bottom: 10px;
-@media only screen and (max-width: 320px) {
-    font-size:${props => props.theme.fontSizes.lg} !important;
+    @media only screen and (min-width: 600px) {
+        width: 100%;
     }
-`
-
-const Operation = styled.p`
-font-size:${props => props.theme.fontSizes.xl};
-color:#a68537;
-letter-spacing: -0.025em;
-margin-bottom: 30px;
-@media only screen and (max-width: 320px) {
-    font-size:${props => props.theme.fontSizes.md} !important;
-    }
-`
-
-const Phonenumber = styled.p`
-font-size:${props => props.theme.fontSizes.xxl};
-color:#666;
-letter-spacing: -0.025em;
-@media only screen and (max-width: 320px) {
-    font-size:${props => props.theme.fontSizes.xl} !important;
+    @media only screen and (min-width: 768px) {
+        width: 50%;
     }
 `
 

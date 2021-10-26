@@ -1,8 +1,8 @@
 import React from "react";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
-const Label = styled.label `
+const Label = styled.label`
 font-size: 15px;
 `
 const Input = styled.input`
@@ -33,16 +33,16 @@ border-bottom:2px solid #175436;
 const Option = styled.option`
 `
 
-const InputDIV = styled.tr `
+const InputDIV = styled.tr`
 height: 30px;
 `
 
 const Table = styled.table`
 margin: 0 auto;
 `
-const Button = styled.button `
+const Button = styled.button`
 `
-const FormStyle = styled.form `
+const FormStyle = styled.form`
     display: inline-block;
     width: 100%;
 `
@@ -93,36 +93,35 @@ const Th = styled.th`
 text-align: left;
 `
 
-const Form = ({defaultValues, children, onSubmit} : any) => {
-    const methods = useForm({defaultValues});
-    const {handleSubmit} = methods;
+const Form = ({ defaultValues, children, onSubmit }: any) => {
+    const methods = useForm({ defaultValues });
+    const { handleSubmit } = methods;
     return (
-        
+
         <FormStyle onSubmit={
             handleSubmit(onSubmit)
         }><Table>
-            <colgroup>
-            <Col1/>
-            <Col2/>
-            </colgroup>
-            {
-            React.Children.map(children, (child) => {
-                console.log(child.type);
-                return child.props.name ? (
-                    <>{
-                        React.createElement(child.type, {
-                            ...{
-                                ...child.props,
-                                register: methods.register,
-                                key: child.props.name
-                            }
-                        })
-                    }</>
-                ) : (child);
-            })
-        } 
-        </Table></FormStyle>
-        
+                <colgroup>
+                    <Col1 />
+                    <Col2 />
+                </colgroup>
+                {
+                    React.Children.map(children, (child) => {
+                        return child.props.name ? (
+                            <>{
+                                React.createElement(child.type, {
+                                    ...{
+                                        ...child.props,
+                                        register: methods.register,
+                                        key: child.props.name
+                                    }
+                                })
+                            }</>
+                        ) : (child);
+                    })
+                }
+            </Table></FormStyle>
+
     );
 };
 
@@ -131,24 +130,24 @@ const InputForm = ({
     name,
     label,
     ...rest
-} : any) => {
+}: any) => {
     return (
         <InputDIV>
             <Th><Label>{label}</Label></Th>
-            <Th><Input {...register(name)} {...rest}/></Th>
+            <Th><Input {...register(name)} {...rest} /></Th>
         </InputDIV>
     );
 };
 
-interface OptionType{
+interface OptionType {
     value: string
 }
 interface SelectProps {
-    register? : any,
+    register?: any,
     name: string,
     label: string,
     options: OptionType[],
-    children? : React.ReactNode
+    children?: React.ReactNode
 
 }
 const SelectForm = ({
@@ -157,14 +156,14 @@ const SelectForm = ({
     label,
     options,
     children
-} : SelectProps) => {
+}: SelectProps) => {
     return (
         <InputDIV>
             <Th><Label>{label}</Label></Th>
-           <Th> <Select {...register(name)}>
+            <Th> <Select {...register(name)}>
                 {
-                    options.map(item => {
-                        return <Option value={item.value}>{item.value}</Option>
+                    options.map((item, key) => {
+                        return <Option value={item.value} key={key}>{item.value}</Option>
                     })
                 }
 
@@ -176,7 +175,7 @@ const SelectForm = ({
 const ButtonForm = ({
     name,
     ...rest
-} : any) => {
+}: any) => {
     return (
         <Button type="submit" {...rest}>
             {name} </Button>

@@ -1,7 +1,7 @@
 import { FirebaseStorage, getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { StoreCreateDTO, Url } from "../../../dto/store-create.dto";
+import { StoreCreateDTO } from "../../../dto/store-create.dto";
 import { GetMultiDownloadUrl } from "../../../components/GetDownloadUrl";
 
 const AdminCreateStore = () => {
@@ -9,7 +9,7 @@ const AdminCreateStore = () => {
     const onSubmit = async (data: StoreCreateDTO) => {
         const downloadUrls: string[] = await GetMultiDownloadUrl(data.tmpUrl);
         data.url = downloadUrls;
-        const res = await fetch("http://localhost:3000/api/store/create", {
+        const res = await fetch(process.env.API_URL + "/api/store/create", {
             method: 'POST',
             body: JSON.stringify(data)
         });

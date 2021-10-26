@@ -1,13 +1,13 @@
-FROM node:16.3-alpine3.12 As development
+FROM node:16.10.0 As development
 
-WORKDIR /
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-RUN set NODE_OPTIONS=--max-old-space-size=30720
-
-COPY . .
+COPY package*.json /usr/src/app
 RUN npm install
-RUN npm run build
+
+COPY . /usr/src/app
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]

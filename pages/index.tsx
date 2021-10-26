@@ -1,8 +1,9 @@
-import type { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, NextPage } from 'next'
-import Head from 'next/head'
-import SimpleImageSlider from "react-simple-image-slider";
+import type { GetServerSideProps, NextPage } from 'next'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 import styled from 'styled-components';
 import { BannerListDTO } from "../dto/banner-create.dto";
+import { PageFullWidthLayout } from '../components/GlobalComponents';
 
 interface Props {
   BannerList: BannerListDTO[]
@@ -14,45 +15,37 @@ const Home: NextPage<Props> = ({ BannerList }) => {
   });
 
   return (
-    <ContentBox>
-      <SimpleImageSlider width="100%" height="100%" images={images} showNavs={true} showBullets={true} />
-    </ContentBox>
+    <PageFullWidthLayout>
+      <Carousel showThumbs={false} swipeable={true}>
+        {
+          BannerList.map((item, key) => (
+            <div key={key}>
+              <Img src={item.url} alt="" />
+            </div>
+          ))
+        }
+      </Carousel>
+    </PageFullWidthLayout>
   )
 }
 
-const ContentBox = styled.div`
-    display: block;
-    position: relative;
-    box-sizing: border-box;
+const Img = styled.img`
+
     @media only screen and (max-width: 600px) {
-      margin-top:50px;
-      width: 100%;
-      height: 200px;
-    }
-    @media only screen and (min-width: 600px) {
-      width: 100%;
-      margin-top:50px;
-      height: 200px;
-    }
-    @media only screen and (min-width: 768px) {
-      width: 100%;
-      margin-top:60px;
+      object-fit: fill;
       height: 300px;
     }
-    @media only screen and (min-width: 992px) {
-      width: 100%;
+    @media only screen and (min-width: 600px) {
+      object-fit: fill;
       height: 400px;
-      margin-top:0px;
     }
-    @media only screen and (min-width: 1200px) {
-        height: 600px;
-        width: 100%;
-        margin-top:0px;
+    @media only screen and (min-width: 768px) {
+      height: auto;
     }
 `;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await fetch("http://localhost:3000/api/banner");
+  const res = await fetch(process.env.API_URL + "/api/banner");
   const BannerList: BannerListDTO[] = await res.json();
 
   if (!BannerList) {

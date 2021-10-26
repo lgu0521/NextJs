@@ -4,8 +4,8 @@ import { StartUpFormDTO } from "../../dto/startup-form.dto";
 import GridBox from "../../components/GridBox";
 import { PageLayout, Button, Content, Title3 } from "../../components/GlobalComponents";
 import PageMainTitle from "../../components/PageMainTitle";
-import Style from "./startup.style";
-import {InputForm, Form, ButtonForm, SelectForm} from '../../components/Form';
+import Style from "../../components/style";
+import { InputForm, Form, ButtonForm, SelectForm } from '../../components/Form';
 
 interface BoxItem {
     step: string,
@@ -52,11 +52,11 @@ const StartUpPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<StartUpFormDTO>();
 
     const onSubmit = async (data: StartUpFormDTO) => {
-        const res = await fetch("http://localhost:3000/api/startup-form/create", {
+        const res = await fetch(process.env.API_URL + "/api/startup-form/create", {
             method: 'POST',
             body: JSON.stringify(data)
         });
-        if(res){
+        if (res) {
             alert("상담 신청이 완료되었습니다");
             setIsFormClick(false);
         }
@@ -67,11 +67,11 @@ const StartUpPage = () => {
             <PageMainTitle title="창업안내" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다." />
             <PageLayout></PageLayout>
             <PageLayout>
-                    <PageMainTitle title="창업절차"/>
-                    <GridBox boxItems={BoxItems} col={4} mdCol={3} smCol={2} height="100px" />
+                <PageMainTitle title="창업절차" />
+                <GridBox boxItems={BoxItems} col={4} mdCol={3} smCol={2} height="100px" />
             </PageLayout>
             <PageLayout>
-            <PageMainTitle title="예상 투자비용"/>
+                <PageMainTitle title="예상 투자비용" />
                 <Style.Table>
                     <colgroup>
                         <col width="270px" />
@@ -130,7 +130,7 @@ const StartUpPage = () => {
                         </tr>
                     </Style.Tfoot>
                 </Style.Table>
-            <Button width="180px" onClick={() => setIsFormClick(true)}>상담 신청하기</Button>
+                <Button width="180px" onClick={() => setIsFormClick(true)}>상담 신청하기</Button>
             </PageLayout>
 
             {
@@ -139,17 +139,17 @@ const StartUpPage = () => {
                         <Style.ModalContent>
                             <Form onSubmit={onSubmit}>
                                 <tr>
-                                    <th colSpan={2} style={{textAlign:"right"}}><Button onClick={() => setIsFormClick(false)} width="70px">닫기</Button></th>
+                                    <th colSpan={2} style={{ textAlign: "right" }}><Button onClick={() => setIsFormClick(false)} width="70px">닫기</Button></th>
                                 </tr>
-                                <InputForm label="성함*" name="name" placeholder="성항을 입력해주세요"/>
-                                <InputForm label="전화번호*" name="phonenumber" placeholder="전화번호를 입력해주세요"/>
-                                <InputForm label="오픈 희망지역*" name="area" placeholder="오픈지역 입력해주세요"/>
-                                <InputForm type="radio" label="점포 유*" value="유" name="experience"/>
-                                <InputForm type="radio" label="점포 무*" value="무" name="experience"/>
-                                <SelectForm name="openday" label="오픈 희망일*" options={[{value:"즉시"},{value:"3개월 이내"},{value:"3개월 이후"}]}/>
-                                <SelectForm name="money" label="사업 예산*" options={[{value:"5천만원 미만"},{value:"5천만원 미만"},{value:"5천만원 미만"}]}/>
+                                <InputForm label="성함*" name="name" placeholder="성항을 입력해주세요" />
+                                <InputForm label="전화번호*" name="phonenumber" placeholder="전화번호를 입력해주세요" />
+                                <InputForm label="오픈 희망지역*" name="area" placeholder="오픈지역 입력해주세요" />
+                                <InputForm type="radio" label="점포 유*" value="유" name="experience" />
+                                <InputForm type="radio" label="점포 무*" value="무" name="experience" />
+                                <SelectForm name="openday" label="오픈 희망일*" options={[{ value: "즉시" }, { value: "3개월 이내" }, { value: "3개월 이후" }]} />
+                                <SelectForm name="money" label="사업 예산*" options={[{ value: "5천만원 미만" }, { value: "5천만원 미만" }, { value: "5천만원 미만" }]} />
                                 <tr>
-                                <th colSpan={2} style={{textAlign:"center"}}><Button type="submit" width="150px">제출</Button></th></tr>
+                                    <th colSpan={2} style={{ textAlign: "center" }}><Button type="submit" width="150px">제출</Button></th></tr>
                             </Form>
                         </Style.ModalContent>
                     </Style.Modal>

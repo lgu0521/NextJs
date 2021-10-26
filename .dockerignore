@@ -1,9 +1,9 @@
-# compiled output
+#compiled output
 /dist
 /node_modules
 /test
-
 /.idea
-
-# OS
+/env
+#OS
 .DS_Store
+.git

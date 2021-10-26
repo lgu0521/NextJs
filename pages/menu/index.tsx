@@ -1,8 +1,8 @@
-import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Image from 'next/image';
 import styled from 'styled-components';
 import seasonal from '../../public/menu/seasonal_bot_img.jpeg';
-import { Title1, Title2, Title3, Content } from '../../components/GlobalComponents';
+import { Title1, Title2, Title3, Content, PageLayout } from '../../components/GlobalComponents';
 import React from 'react';
 import PageMainTitle from '../../components/PageMainTitle';
 import { MenuListDTO } from '../../dto/menu-create.dto';
@@ -70,102 +70,39 @@ interface Props {
     GimbabList: MenuListDTO[]
 };
 
-const Meau:NextPage<Props> = ({GimbabList}) => {
+const Meau: NextPage<Props> = ({ GimbabList }) => {
     console.log(GimbabList);
     return (
         <>
             <PageMainTitle title="메뉴" description="비오키친과 함께 하실 점주님을 모집합니다. 세계적인 브랜드의 성공 철학을 공유합니다." />
-            <GridWrap>
-                <TitleWrap>
-                    <Title2>시즈널 메뉴<strong><br />Seasonal Menu</strong></Title2>
-                    <p>*시즈널 메뉴는 계절 한정으로 판매됩니다.</p>
-                </TitleWrap>
-                <Grid>
-                    {GimbabList.map((item, key) => (
-                        <Item key={key}>
-                            <Image src={item.url} alt="" height={340}
-                                width={380} layout="intrinsic" />
-                            <span>
-                                <h5>{item.title}</h5>
-                                <p>{item.content}</p>
-                            </span>
-                        </Item>
-                    ))}
-                </Grid>
-            </GridWrap>
-            <GridWrap>
-                <TitleWrap>
-                    <Title1>시즈널 메뉴<br /><Title2>Seasonal Menu</Title2></Title1>
-                    <p><Title3>*시즈널 메뉴는 계절 한정으로 판매됩니다.</Title3></p>
-                </TitleWrap>
-                <Grid>
+            <PageLayout style={{ padding: "50px 0px" }}>
+                <Title1>시즈널 메뉴<strong><br />Seasonal Menu</strong></Title1>
+                <Content>*시즈널 메뉴는 계절 한정으로 판매됩니다.</Content>
                 {GimbabList.map((item, key) => (
-                        <Item key={key}>
-                            <Image src={item.url} alt="" height={340}
-                                width={380} layout="intrinsic" />
-                            <span>
-                                <h5>{item.title}</h5>
-                                <p>{item.content}</p>
-                            </span>
-                        </Item>
-                    ))}
-                </Grid>
-            </GridWrap>
+                    <ImageItem key={key}>
+                        <Image src={item.url} alt="" height={340} width={380} layout="intrinsic" />
+                        <Content style={{ fontWeight: 700 }}>{item.title}</Content>
+                        <Content>{item.content}</Content>
+                    </ImageItem>
+                ))}
+            </PageLayout>
             <Image src={seasonal} alt="" />
-            <GridWrap>
-                <TitleWrap>
-                    <Title2>Make Your Own Salady</Title2>
-                    <p>*기본 베이스인 '채소볼' 또는 '곡물볼'을 선택하여 기호에 맞게 커스터마이징(customizing) 해서 즐기세요!</p>
-                </TitleWrap>
-                <Grid>
-                    {Topping.map((item, key) => (
-                        <TextItem key={key}>
-                            <span>
-                                <h5>{item.Kname}</h5>
-                                <p>{item.Ename}</p>
-                            </span>
-                        </TextItem>
-                    ))}
-                </Grid>
-            </GridWrap>
-            <GridWrap>
-                <TitleWrap>
-                    <Title2>서브 토핑 Sub Topping</Title2>
-                    <p>*토핑 추가는 메인토핑과 서브토핑 포함 최대 5개까지 가능합니다.</p>
-                </TitleWrap>
-                <Grid>
-                    {Topping.map((item, key) => (
-                        <TextItem key={key}>
-                            <span>
-                                <h5>{item.Kname}</h5>
-                                <p>{item.Ename}</p>
-                            </span>
-                        </TextItem>
-                    ))}
-                </Grid>
-            </GridWrap>
-            <GridWrap>
-                <TitleWrap>
-                    <Title2>드레싱 Dressing</Title2>
-                    <p>*드레싱은 모두 샐러디만의 레시피로 만들어졌으며, 주문 시 변경이 가능합니다.</p>
-                </TitleWrap>
-                <Grid>
-                    {Topping.map((item, key) => (
-                        <TextItem key={key}>
-                            <span>
-                                <h5>{item.Kname}</h5>
-                                <p>{item.Ename}</p>
-                            </span>
-                        </TextItem>
-                    ))}
-                </Grid>
-            </GridWrap>
+            <PageLayout>
+                <Title1>Make Your Own Salady</Title1>
+                <Content>*기본 베이스인 '채소볼' 또는 '곡물볼'을 선택하여 기호에 맞게 커스터마이징(customizing) 해서 즐기세요!</Content>
+                {Topping.map((item, key) => (
+                    <TextItem key={key}>
+                        <Content style={{ fontWeight: 700 }}>{item.Kname}</Content>
+                        <Content>{item.Ename}</Content>
+                    </TextItem>
+                ))}
+            </PageLayout>
         </>
     );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const res = await fetch("http://localhost:3000/api/menu/Gimbab");
+    const res = await fetch(process.env.API_URL + "/api/menu/Gimbab");
     const GimbabList: MenuListDTO[] = await res.json();
 
     if (!GimbabList) {
@@ -181,22 +118,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-const GridWrap = styled.section`
-  margin: 0 1em;
-`
-
-const Grid = styled.div`
-    text-align: center;
-    margin: 0 auto;
-    @media only screen and (max-width: 768px) {
-        width: auto;
-    }
-    @media only screen and (min-width: 1200px) {
-        width: 1200px;
-    }
-`
-
-const Item = styled.span`
+const ImageItem = styled.div`
     width:50%;
     display: inline-block;
 `
@@ -204,23 +126,24 @@ const Item = styled.span`
 const TextItem = styled.span`
     align-items: center;
     text-align: center;
-    
     display:inline-block;
     text-align: left;
     margin: 10px;
     padding: 10px 30px;
     box-sizing: border-box;
     background: #f7f7f7;
-    @media only screen and (max-width: 1190px) {
-        width: calc(50% - 23px);
+    @media only screen and (max-width: 600px) {
+        width: calc(100%/2 - 23px);
+    }
+    @media only screen and (min-width: 600px) {
+        width: calc(100%/2 - 23px);
+    }
+    @media only screen and (min-width: 768px) {
+        width: calc(100%/3 - 23px);
     }
     @media only screen and (min-width: 1200px) {
-        width: calc(25% - 23px);
+        width: calc(100%/4 - 23px);
     }
 `
 
-const TitleWrap = styled.div`
-text-align: center;
-padding-bottom: 20px;
-`
 export default Meau;

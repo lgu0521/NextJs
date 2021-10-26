@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Title1 = styled.span`
+const Title1 = styled.h1`
 @media only screen and (max-width: 600px) {
     font-size: ${props => props.theme.fontSizes.xl};;
 }
@@ -19,7 +19,7 @@ const Title1 = styled.span`
 color: #333;
 `;
 
-const Title2 = styled.span`
+const Title2 = styled.h2`
 @media only screen and (max-width: 600px) {
     font-size: ${props => props.theme.fontSizes.lg};;
 }
@@ -38,7 +38,7 @@ const Title2 = styled.span`
 color: #333;
 `;
 
-const Title3 = styled.span`
+const Title3 = styled.h3`
 @media only screen and (max-width: 600px) {
     font-size: ${props => props.theme.fontSizes.md};;
 }
@@ -57,7 +57,47 @@ const Title3 = styled.span`
 color: #333;
 `;
 
-const Content = styled.span`
+
+const Title4 = styled.h4`
+@media only screen and (max-width: 600px) {
+    font-size: ${props => props.theme.fontSizes.md};;
+}
+@media only screen and (min-width: 600px) {
+    font-size: ${props => props.theme.fontSizes.md};
+}
+@media only screen and (min-width: 768px) {
+    font-size: ${props => props.theme.fontSizes.lg};
+}
+@media only screen and (min-width: 992px) {
+    font-size: ${props => props.theme.fontSizes.lg};
+}
+@media only screen and (min-width: 1200px) {
+    font-size: ${props => props.theme.fontSizes.xl};
+}
+color: #333;
+`;
+
+const Title5 = styled.h5`
+@media only screen and (max-width: 600px) {
+    font-size: ${props => props.theme.fontSizes.md};;
+}
+@media only screen and (min-width: 600px) {
+    font-size: ${props => props.theme.fontSizes.md};
+}
+@media only screen and (min-width: 768px) {
+    font-size: ${props => props.theme.fontSizes.lg};
+}
+@media only screen and (min-width: 992px) {
+    font-size: ${props => props.theme.fontSizes.lg};
+}
+@media only screen and (min-width: 1200px) {
+    font-size: ${props => props.theme.fontSizes.xl};
+}
+color: #333;
+`;
+
+
+const Content = styled.p`
 @media only screen and (max-width: 600px) {
     font-size: ${props => props.theme.fontSizes.xm};;
 }
@@ -76,7 +116,7 @@ const Content = styled.span`
 color: #333;
 `;
 
-export { Title1, Title2, Title3, Content , Button, PageLayout};
+export { Title1, Title2, Title3, Title4, Content , Button, PageLayout, PageFullWidthLayout};
 
 interface PropsType {
     width?: string;
@@ -119,4 +159,12 @@ const PageLayout = styled.div`
     @media only screen and (min-width: 1200px) {
         width: 1200px;
     }
+`
+
+const PageFullWidthLayout = styled.div`
+    display: table;
+    margin: 0 auto;
+    overflow: auto;
+    text-align: center;
+    width:100%;
 `

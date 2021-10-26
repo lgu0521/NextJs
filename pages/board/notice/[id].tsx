@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { GetServerSideProps, GetStaticPaths, InferGetServerSidePropsType } from 'next';
+import { GetServerSideProps } from 'next';
 import { Params } from 'next/dist/server/router';
 import { NoticeDTO } from '../../../dto/notice-create.dto'
 import dynamic from 'next/dynamic';
@@ -18,7 +18,7 @@ const TuiNoSSRWrapper = dynamic<ViewerProps>(() => import('../../../components/V
 const TuiWrapper = React.forwardRef((props: ViewerProps, ref) => (
     <TuiNoSSRWrapper {...props} />
 ));
-
+TuiWrapper.displayName= 'Editor';
 
 const NoticeDetailPage = ({ notice }: Props) => {
     return (
@@ -55,7 +55,7 @@ const NoticeDetailPage = ({ notice }: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }: Params) => {
     const { id } = params;
-    const res = await fetch(`http://localhost:3000/api/notice/${id}`);
+    const res = await fetch(process.env.API_URL+`/api/notice/${id}`);
     const notice: NoticeDTO = await res.json();
 
     if (!notice) {

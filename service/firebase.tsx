@@ -1,13 +1,13 @@
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCjqEVxe4F0CRkQHFNIH_nmwDOzHOJk-Bw",
-    authDomain: "beeokitchen-env.firebaseapp.com",
-    projectId: "beeokitchen-env",
-    storageBucket: "beeokitchen-env.appspot.com",
-    messagingSenderId: "437687409867",
-    appId: "1:437687409867:web:7061788d625a5aed180f4e",
-    measurementId: "G-LYK6H9YMKB"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENTID
 }
 
 const firebase = initializeApp(firebaseConfig);

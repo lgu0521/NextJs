@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-
-const Table = styled.table`
+export const Table = styled.table`
     border-spacing: 0;
     border-top: 4px solid #009223;
     min-width:1200px;
@@ -25,19 +24,19 @@ const Table = styled.table`
         letter-spacing: -0.05em;
         border-bottom: 1px solid #dddddd;
     }
-`
+`;
 
-const Tbody = styled.tbody`
+export const Tbody = styled.tbody`
 
-`
+`;
 
-const Thead= styled.thead`
+export const Thead= styled.thead`
     tr > th {
     font-weight: bold;
     }
-`
+`;
 
-const Tfoot = styled.tfoot`
+export const Tfoot = styled.tfoot`
     background-color: #f6f6f6;
     tr > th{
         font-weight: bold;
@@ -45,9 +44,9 @@ const Tfoot = styled.tfoot`
     tr > td{
         font-weight: bold;
     }
-`
+`;
 
-const Modal = styled.div`
+export const Modal = styled.div`
   position: fixed;
   z-index: 1;
   left: 0;
@@ -57,8 +56,9 @@ const Modal = styled.div`
   overflow: auto;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
-`
-const ModalContent = styled.div`
+`;
+
+export const ModalContent = styled.div`
     background-color: #fefefe;
     margin: 5% auto;
     border: 1px solid #888;
@@ -87,7 +87,7 @@ const ModalContent = styled.div`
         padding: 20px;
         width: 50%;
     }
-`
+`;
 
 const Style = {
     Table,

@@ -1,6 +1,7 @@
 import { Viewer, ViewerProps } from "@toast-ui/react-editor";
 
-export default (props: ViewerProps) => (
+const ToastViewer = (props: ViewerProps) => (
     <Viewer {...props} />
 );
  
+export default ToastViewer;

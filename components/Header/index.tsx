@@ -1,9 +1,88 @@
-/* eslint-disable */
-
 import Link from "next/link";
 import styled from 'styled-components';
 import Logo from '../../public/logo.jpeg'
 import Image from 'next/image';
+
+const Header = () => {
+    return (
+        <div>
+            <PcHeade>
+                <Nav height="100px">
+                    <Wrap width="20%" height="100%">
+                        <Image height={70} width={78} src={Logo} alt=""/>
+                    </Wrap>
+                    <Wrap width="60%" height="100%">
+                        <Ul>
+                            <Li>
+                                <Link href="/brand">
+                                    <a>브랜드</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/menu">
+                                    <a>메뉴</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/store">
+                                    <a>매장</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/startup">
+                                    <a>창업안내</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/board">
+                                    <a>게시판</a>
+                                </Link>
+                            </Li>
+                        </Ul>
+                    </Wrap>
+                    <Wrap width="20%" height="100%" />
+                </Nav>
+            </PcHeade>
+            <MobileHeade>
+                <Nav height="75px">
+                    <Wrap width="100%" height="75px">
+                        <Image height={60} width={68} src={Logo} alt="" />
+                    </Wrap>
+                    <LineWrap width="100%" height="50px">
+                        <Ul>
+                            <Li>
+                                <Link href="/brand">
+                                    <a>브랜드</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/menu">
+                                    <a>메뉴</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/store">
+                                    <a>매장</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/startup">
+                                    <a>창업안내</a>
+                                </Link>
+                            </Li>
+                            <Li>
+                                <Link href="/board">
+                                    <a>게시판</a>
+                                </Link>
+                            </Li>
+                        </Ul>
+                    </LineWrap>
+                </Nav>
+            </MobileHeade>
+        </div>
+
+    )
+};
 
 const Ul = styled.div`
     display: flex;
@@ -84,84 +163,4 @@ const MobileHeade = styled.div`
         display: none !important;
     }
 `
-const Header = () => {
-    return (
-        <div>
-            <PcHeade>
-                <Nav height="100px">
-                    <Wrap width="20%" height="100%">
-                        <Image height={70} width={78} src={Logo} />
-                    </Wrap>
-                    <Wrap width="60%" height="100%">
-                        <Ul>
-                            <Li>
-                                <Link href="/brand">
-                                    <a>브랜드</a>
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link href="/menu">
-                                    <a>메뉴</a>
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link href="/store">
-                                    <a>매장</a>
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link href="/startup">
-                                    <a>창업안내</a>
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link href="/board">
-                                    <a>게시판</a>
-                                </Link>
-                            </Li>
-                        </Ul>
-                    </Wrap>
-                    <Wrap width="20%" height="100%" />
-                </Nav>
-            </PcHeade>
-            <MobileHeade>
-                <Nav height="75px">
-                    <Wrap width="100%" height="75px">
-                        <Image height={60} width={68} src={Logo} />
-                    </Wrap>
-                    <LineWrap width="100%" height="50px">
-                        <Ul>
-                            <Li>
-                                <Link href="/brand">
-                                    <a>브랜드</a>
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link href="/menu">
-                                    <a>메뉴</a>
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link href="/store">
-                                    <a>매장</a>
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link href="/startup">
-                                    <a>창업안내</a>
-                                </Link>
-                            </Li>
-                            <Li>
-                                <Link href="/board">
-                                    <a>게시판</a>
-                                </Link>
-                            </Li>
-                        </Ul>
-                    </LineWrap>
-                </Nav>
-            </MobileHeade>
-        </div>
-
-    )
-};
 export default Header;

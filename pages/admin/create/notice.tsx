@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import dynamic from 'next/dynamic';
 import { EditorProps, Editor } from '@toast-ui/react-editor';
 import styled from 'styled-components';
@@ -17,6 +15,8 @@ const TuiWrapper = React.forwardRef((props: EditorProps, ref) => (
     <TuiNoSSRWrapper {...props} forwardedRef={ref as React.MutableRefObject<Editor>} />
 ));
 
+TuiWrapper.displayName='Editor';
+
 const AdminCreateNotice = () => {
     const editorRef = useRef<Editor>(null);
     const [titleInput, setTitleInput] = useState("");
@@ -24,8 +24,8 @@ const AdminCreateNotice = () => {
         if (editorRef.current && titleInput) {
             const content = editorRef.current.getInstance().getMarkdown();
             console.log(titleInput + "  " + content);
-            const res = await fetch("http://localhost:3000/api/notice/create", {
-                method: 'POST', 
+            const res = await fetch(process.env.API_URL + "/api/notice/create", {
+                method: 'POST',
                 body: JSON.stringify({
                     title: titleInput,
                     content: content

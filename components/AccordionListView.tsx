@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Title3, Content } from './GlobalComponents';
 import { FaqDTO } from '../dto/faq-create.dto';
 
-const AccordionListView = ({ title, content }: FaqDTO) => {
+const AccordionListView = ({ title, content }: FaqDTO, ) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
