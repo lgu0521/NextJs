@@ -1,11 +1,17 @@
-FROM node:16.10.0 As development
+FROM node:16.10.0 as base
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
 
-COPY . /usr/src/app
-RUN npm install
-RUN npm run dev
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+
+ENV CONTINUOUS_INTEGRATION=1
+ENV NODE_ENV=production
+
+COPY . .
+RUN npm run build
 
 EXPOSE 3000
 
