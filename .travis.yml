@@ -14,7 +14,8 @@ branches: # 해당 브렌치로 push 될 경우에만 반응합니다
   only:
     - master
 
-notifications: # 변경사항이 있을때 알림을 받을 수 있도록
+
+notifications: # 변경사항이 있을때 알림을 받을 수 있도록d
   email:
     on_success
     on_failure: always
