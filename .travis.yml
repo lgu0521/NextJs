@@ -9,10 +9,11 @@ services: # docker 로 감싸서 배포할거에요
 
 before_install: 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t beeokitchen -f Dockerfile .
+  - docker build . -t beeokitchen -f Dockerfile .
+
 branches: # 해당 브렌치로 push 될 경우에만 반응합니다
   only:
-    - master
+    - main
 
 
 notifications: # 변경사항이 있을때 알림을 받을 수 있도록dd

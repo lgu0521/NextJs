@@ -4,7 +4,7 @@ FROM node:16.10.0 as base
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm install
 
 
 ENV CONTINUOUS_INTEGRATION=1
